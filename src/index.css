@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --steps: 27;
+  --background: #1d1f20;
+}
+
+.card {
+  background-color: rgb(37, 37, 37);
+  padding: 2rem;
+}
+
+.container-wrapper {
+  letter-spacing: 1px;
+}
+
+.container {
+  transition: 0.2s;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+}
+
+.container:hover {
+  border-radius: 1rem;
+  color: rgb(255, 255, 255);
+}
+
+.text-h1 {
+  text-align: start;
+}
+
+.status-h1 {
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+}
+
+body {
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+  background: var(--background);
+}
+.typing {
+  font-family: "Inconsolata", Consolas, monospace;
+  font-size: 2vw;
+  color: #d7b94c;
+  position: relative;
+}
+
+.typing:after {
+  content: "|";
+  position: absolute;
+  right: 0;
+  width: 100%;
+  color: white;
+  background: var(--background);
+  animation: typing 2s steps(var(--steps)) forwards, caret 1s infinite;
+}
+
+@keyframes typing {
+  to {
+    width: 0;
+  }
+}
+@keyframes caret {
+  50% {
+    color: transparent;
+  }
+}
