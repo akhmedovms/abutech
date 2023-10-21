@@ -4,6 +4,7 @@ import Loading from "./components/Loading";
 import { BsGoogle, BsInstagram, BsTwitter } from "react-icons/bs";
 import { FaYandex, FaXTwitter } from "react-icons/fa6";
 import { SlSocialVkontakte } from "react-icons/sl";
+import DarkLightMode from "./components/DarkLightMode";
 
 const links = [
   {
@@ -63,7 +64,7 @@ function App() {
 
   useEffect(() => {
     async function getData() {
-      const fetchPromises = links.map(async (url) => {
+      const fetchPromise = links.map(async (url) => {
         try {
           const response = await fetch(url);
           const status = response.status;
@@ -74,27 +75,29 @@ function App() {
           return { name: url.name, status: "Error Fetching", color: "#808080" };
         }
       });
-      const results = await Promise.all(fetchPromises);
+      const results = await Promise.all(fetchPromise);
       setData(results);
     }
     getData();
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center gap-5 pb-5">
       {data.length > 0 ? <Header /> : ""}
+      {data.length > 0 ? <DarkLightMode /> : ""}
+
       <ul className="card">
         {data.length > 0 ? (
           data.map((item) => {
             return (
               <li
                 key={item.name}
-                className="container flex items-center gap-16"
+                className="container flex flex-col sm:flex-row items-center gap-2 sm:gap-16"
               >
-                <h1 className="text-h1 flex items-center gap-4 mr-auto">
+                <div className="flex items-center gap-4 mr-auto">
                   <span>{item.icon}</span>
-                  {item.name}
-                </h1>
+                  <h1 className="text-h1">{item.name}</h1>
+                </div>
                 <h1 className="status-h1">
                   <span className="magic-text" style={{ color: item.color }}>
                     {item.status}
